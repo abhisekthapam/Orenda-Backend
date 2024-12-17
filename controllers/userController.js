@@ -29,4 +29,19 @@ const registerUser = async (req, res) => {
     }
 };
 
-module.exports = { registerUser };
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+
+        if (!users || users.length === 0) {
+            return res.status(204).json({ message: 'No users found' });
+        }
+        res.status(200).json({ message: 'Users fetched successfully', users });
+    } catch (err) {
+        console.error('Error fetching users:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
+module.exports = { registerUser, getAllUsers };
