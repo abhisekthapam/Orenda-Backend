@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
         default: 'user',
     },
     phone: { type: String, unique: true },
+    profileImage: { type: String }, 
     createdAt: { type: Date, default: Date.now },
     loginHistory: [
         {

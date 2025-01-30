@@ -6,7 +6,7 @@ const saltRounds = 10;
 
 const registerUser = async (req, res) => {
     try {
-        const { name, email, password, role, phone } = req.body;
+        const { name, email, password, role, phone, profileImage } = req.body;
 
         const { error } = userValidator.validate({ name, email, password, role, phone });
         if (error) throw new Error(error.details[0].message);
@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
         const phoneExists = await User.findOne({ phone });
         if (phoneExists) throw new Error('Phone number already in use');
 
-        const newUser = new User({ name, email, password, role, phone });
+        const newUser = new User({ name, email, password, role, phone, profileImage });
         await newUser.save();
 
         res.status(201).json({ message: 'User created successfully', user: newUser });
@@ -31,6 +31,24 @@ const registerUser = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
+const uploadProfileImage = async (req, res) => {
+    try {
+        if (!req.file) {
+            throw new Error('No file uploaded');
+        }
+
+        const imagePath = `/uploads/profile-images/${req.file.filename}`;
+        res.status(200).json({
+            message: 'Image uploaded successfully',
+            imagePath,
+        });
+    } catch (err) {
+        console.error('Error uploading image:', err.message);
+        res.status(400).json({ message: err.message });
+    }
+};
+
 
 const getAllUsers = async (req, res) => {
     try {
@@ -72,7 +90,7 @@ const getUserById = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, email, password, role, phone } = req.body;
+        const { name, email, password, role, phone, profileImage } = req.body;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: 'Invalid user ID format' });
@@ -108,6 +126,7 @@ const updateUser = async (req, res) => {
         if (password) updatedFields.password = await bcrypt.hash(password, saltRounds);
         if (role) updatedFields.role = role;
         if (phone) updatedFields.phone = phone;
+        if (profileImage) updatedFields.profileImage = profileImage;
 
         const updatedUser = await User.findByIdAndUpdate(id, updatedFields, {
             new: true,
@@ -130,5 +149,4 @@ const updateUser = async (req, res) => {
     }
 };
 
-
-module.exports = { registerUser, getAllUsers, getUserById, updateUser };
+module.exports = { registerUser, getAllUsers, getUserById, updateUser, uploadProfileImage };
