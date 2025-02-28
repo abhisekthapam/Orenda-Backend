@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const mapRequestBodyToImage = require("../utils/mapper");
 const deleteFile = require("../utils/file.delete");
 const imageService = require("../service/image.service");
-const { imageSchema } = require("../validator/image.schema.validator");
+const { imageSchema } = require("../validators/image.schema.validator");
 
 // Create a new image
 async function createImage(req, res) {

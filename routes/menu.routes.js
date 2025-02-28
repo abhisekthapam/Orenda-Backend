@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const menuController = require("../controller/menu.controller");
+const menuController = require("../controllers/menu.controller");
 const verify = require("../middleware/token.verify");
 
 router.post("/additem", menuController.createMenu);

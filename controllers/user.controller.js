@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const userService = require("../service/user.service");
 const mapRequestBodyToUser = require("../utils/mapper");
-const { userSchema } = require("../validator/user.schema.validator");
+const { userSchema } = require("../validators/user.schema.validator");
 
 // Function to generate JWT token
 function generateToken(user) {

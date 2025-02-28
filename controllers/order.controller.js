@@ -1,5 +1,5 @@
 const { orderService } = require("../service/order.service");
-const { orderSchema } = require("../validator/order.schema.validator");
+const { orderSchema } = require("../validators/order.schema.validator");
 const mapRequestBodyToOrder = require("../utils/mapper");
 const mongoose = require("mongoose");
 

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const mapRequestBodyToMenu = require("../utils/mapper");
-const { menuSchema } = require("../validator/menu.schema.validator");
+const { menuSchema } = require("../validators/menu.schema.validator");
 const menuService = require("../service/menu.service");
 const imageService = require("../service/image.service");
 const deleteFile = require("../utils/file.delete");

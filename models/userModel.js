@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         default: 'user',
     },
     phone: { type: String, unique: true },
-    profileImage: { type: String }, 
+    profileImage: { type: String },
     createdAt: { type: Date, default: Date.now },
     loginHistory: [
         {
@@ -54,4 +54,4 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
     return bcrypt.compare(candidatePassword, this.password);
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.models.User || mongoose.model('User', userSchema);
