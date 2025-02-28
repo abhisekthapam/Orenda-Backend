@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const app = express();
-const routes = require("../router/index.routes");
+const routes = require("../routes/index.routes");
 const BASE_URL = "/api/v1";
 
 app.use(cors());

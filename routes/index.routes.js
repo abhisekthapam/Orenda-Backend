@@ -3,7 +3,7 @@ const upload = require("../utils/file.upload");
 const userRoutes = require("./user.routes");
 const menuRoutes = require("./menu.routes");
 const orderRoutes = require("./order.routes");
-const imageController = require("../controller/image.controller");
+const imageController = require("../controllers/image.controller");
 
 router.use("/user", userRoutes);
 router.use("/menu", menuRoutes);
